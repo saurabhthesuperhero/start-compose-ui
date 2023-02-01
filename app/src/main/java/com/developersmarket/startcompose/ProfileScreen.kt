@@ -2,6 +2,7 @@ package com.developersmarket.startcompose
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -22,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,9 +38,57 @@ import androidx.compose.ui.unit.sp
         Spacer(modifier = Modifier.height(4.dp))
         ProfileSection()
         Spacer(modifier = Modifier.height(25.dp))
-        ButtonSection(modifier = Modifier.fillMaxWidth())
+        ButtonSection(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+        )
         Spacer(modifier = Modifier.height(25.dp))
+        HighlightSection(
+                highlight = listOf(
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Morning"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Afternoon"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Night"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Dance"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Yoga"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Karate"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Love"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Selfie"
+                        ),
+                        StoryHighlight(
+                                painterResource(id = R.drawable.demo_img),
+                                text = "Heart"
+                        )
 
+
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+        )
     }
 }
 
@@ -303,6 +353,32 @@ import androidx.compose.ui.unit.sp
     }
 
 }
+
+@Composable fun HighlightSection(modifier: Modifier = Modifier, highlight: List<StoryHighlight>) {
+    LazyRow(modifier = modifier) {
+        items(highlight.size) {
+            Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.padding(end = 15.dp)
+            ) {
+                RoundImage(
+                        image = highlight[it].image,
+                        modifier = Modifier.size(70.dp)
+                )
+                Text(
+                        text = highlight[it].text,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+//@Composable fun PostTabView(modifier: Modifier = Modifier, onTabSelected: (selectedIndex: Int) -> Unit) {
+//    var selectedTabIndex by remember
+//}
 
 
 
