@@ -438,13 +438,13 @@ import androidx.compose.ui.unit.sp
         mutableStateOf(0)
     }
     val inactiveColor = Color(0xFF777777)
-        TabRow(
-                selectedTabIndex = selectedTabIndex,
-                backgroundColor = Color.Transparent,
-                contentColor = Color.Black,
-                modifier = modifier
-        ) {
-            imageWithTexts.forEachIndexed { index, item ->
+    TabRow(
+            selectedTabIndex = selectedTabIndex,
+            backgroundColor = Color.Transparent,
+            contentColor = Color.Black,
+            modifier = modifier
+    ) {
+        imageWithTexts.forEachIndexed { index, item ->
 
             Tab(selected = selectedTabIndex == index,
                     selectedContentColor = Color.Black,

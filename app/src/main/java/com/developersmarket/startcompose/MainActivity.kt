@@ -42,7 +42,9 @@ class MainActivity : ComponentActivity() {
                     Image(
                             painter = painterResource(id = R.drawable.demo_img),
                             contentDescription = "",
-                            modifier = Modifier.size(size = 60.dp).clip(CircleShape),
+                            modifier = Modifier
+                                .size(size = 60.dp)
+                                .clip(CircleShape),
                             contentScale = ContentScale.FillBounds
 
                     )
