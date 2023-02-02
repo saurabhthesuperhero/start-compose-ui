@@ -4,19 +4,26 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.developersmarket.startcompose.ui.theme.StartComposeTheme
 import com.developersmarket.startcompose.ui.theme.md_theme_light_primary
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 
 class ComponentsActivity : ComponentActivity() {
 
@@ -24,7 +31,7 @@ class ComponentsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             StartComposeTheme() {
-                    ComponentsScreen()
+                ComponentsScreen()
             }
         }
     }
@@ -51,6 +58,12 @@ class ComponentsActivity : ComponentActivity() {
         val isCheckedTwo = remember {
             mutableStateOf(false)
         }
+
+
+
+        val (checkedState_1, onStateChange_1) = remember { mutableStateOf(true) }
+        val (checkedState_2, onStateChange_2) = remember { mutableStateOf(true) }
+
         Column(
                 modifier = Modifier
                     .padding(
@@ -58,6 +71,7 @@ class ComponentsActivity : ComponentActivity() {
                             vertical = 8.dp
                     )
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
         ) {
 
             Text(
@@ -183,7 +197,10 @@ class ComponentsActivity : ComponentActivity() {
                     },
             )
 
-            Row(horizontalArrangement = Arrangement.Center) {
+            Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+            ) {
                 Switch(
                         checked = isCheckedOne.value,
                         enabled = true,
@@ -202,10 +219,84 @@ class ComponentsActivity : ComponentActivity() {
                         modifier = Modifier.padding(horizontal = 8.dp)
 
                 )
+
             }
 
+            Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+            ) {
+
+                Row(
+                        Modifier
+                            .height(56.dp)
+                            .toggleable(
+                                    value = checkedState_1,
+                                    onValueChange = { onStateChange_1(!checkedState_1) },
+                                    role = Role.Checkbox
+                            )
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Checkbox(
+                            checked = checkedState_1,
+                            onCheckedChange = null // null recommended for accessibility with screenreaders
+                    )
+                    Text(
+                            text = "CheckBox 1",
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+
+                Row(
+                        Modifier
+                            .height(56.dp)
+                            .toggleable(
+                                    value = checkedState_2,
+                                    onValueChange = { onStateChange_2(!checkedState_2) },
+                                    role = Role.Checkbox
+                            )
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Checkbox(
+                            checked = checkedState_2,
+                            onCheckedChange = null // null recommended for accessibility with screenreaders
+                    )
+                    Text(
+                            text = "CheckBox 2",
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+
+            }
+
+
+            Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    modifier = Modifier.fillMaxWidth()
+            ) {
+                Button(
+                        onClick = { /* Do something! */ },
+                        contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+                ) {
+                    Icon(
+                            Icons.Filled.Favorite,
+                            contentDescription = "Localized description",
+                            modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                    Text("Like")
+                }
+
+                Button(onClick = { /* Do something! */ }) { Text("Button") }
+
+            }
         }
+
     }
-
-
 }
+
+
