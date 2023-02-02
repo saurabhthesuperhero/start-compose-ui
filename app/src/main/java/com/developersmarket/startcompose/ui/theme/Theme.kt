@@ -78,11 +78,6 @@ private val DarkColors = darkColorScheme(
 ) {
     val dynamicColor = isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
-    Log.e(
-            "checkme",
-            "StartComposeTheme: ",
-
-            )
     val colors = when {
         dynamicColor && useDarkTheme -> {
             dynamicDarkColorScheme(LocalContext.current)
@@ -92,10 +87,6 @@ private val DarkColors = darkColorScheme(
         }
         useDarkTheme -> DarkColors
         else -> {
-            Log.e(
-                    "checkme",
-                    "StartComposeTheme: light ",
-            )
             LightColors
         }
     }

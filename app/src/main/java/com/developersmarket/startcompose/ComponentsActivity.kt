@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.Composable
@@ -29,7 +29,7 @@ class ComponentsActivity : ComponentActivity() {
         }
     }
 
-    @Composable fun ComponentsScreen() {
+    @OptIn(ExperimentalMaterial3Api::class) @Composable fun ComponentsScreen() {
         val textBoxSingle = remember {
             mutableStateOf("")
         }

@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
@@ -27,7 +27,7 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             StartComposeTheme() {
-                Surface(color = MaterialTheme.colors.background) {
+                Surface() {
                     LoginScreen()
 
                 }
@@ -44,7 +44,7 @@ class LoginActivity : ComponentActivity() {
         }
     }
 
-    @Composable fun LoginScreen() {
+    @OptIn(ExperimentalMaterial3Api::class) @Composable fun LoginScreen() {
         val username = remember {
             mutableStateOf("")
         }
