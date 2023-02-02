@@ -6,10 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -22,7 +27,51 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProfileScreen()
+//            ProfileScreen()
+
+            StartComposeTheme() {
+                Scaffold(topBar = {
+                    TopAppBar(title = { Text(text = "My App") },
+                            navigationIcon = {
+                                IconButton(onClick = { /*TODO*/ }) {
+                                    Icon(
+                                            imageVector = Icons.Default.Menu,
+                                            contentDescription = "Menu"
+                                    )
+                                }
+                            },
+                            actions = {
+                                IconButton(onClick = { /*TODO*/ }) {
+                                    Icon(
+                                            imageVector = Icons.Default.Notifications,
+                                            contentDescription = "Noti"
+                                    )
+                                }
+                                IconButton(onClick = { /*TODO*/ }) {
+                                    Icon(
+                                            imageVector = Icons.Default.Search,
+                                            contentDescription = "Search"
+                                    )
+                                }
+                            })
+
+
+                },
+                        floatingActionButton = {
+                            FloatingActionButton(onClick = { }) {
+                                IconButton(onClick = { /*TODO*/ }) {
+                                    Icon(
+                                            imageVector = Icons.Default.Add,
+                                            contentDescription = "Add"
+                                    )
+                                }
+                            }
+                        },
+                        floatingActionButtonPosition = FabPosition.Center
+                ) {
+                    ShowSwitch()
+                }
+            }
         }
     }
 }
@@ -64,15 +113,42 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Composable fun MyApp() {
-    MaterialTheme {
-        ShowInfo()
-    }
-
-}
-
 @Preview(showBackground = true) @Composable fun DefaultPreview() {
-    StartComposeTheme {
-        MyApp()
-    }
+    StartComposeTheme {}
 }
+
+@Composable fun ShowSwitch() {
+    val isChecked= remember {
+        mutableStateOf(true )
+    }
+    Switch(
+            checked = isChecked.value,
+            onCheckedChange = {
+                isChecked.value=it
+            },
+            modifier = Modifier.run {
+                size(20.dp)
+                padding(10.dp)
+            }
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
